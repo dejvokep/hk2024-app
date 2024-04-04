@@ -1,3 +1,4 @@
+/*
 import {Pool, QueryResult} from 'pg'
 
 const pool = new Pool({
@@ -12,3 +13,9 @@ export function query(text: string, params?: any[], callback?: any): Promise<Que
     // @ts-ignore
     return pool.query(text, params || [], callback)
 }
+*/
+
+import {neon} from "@neondatabase/serverless";
+
+const sql = neon(process.env.NEON_DB || "", {fullResults: true})
+export default sql
