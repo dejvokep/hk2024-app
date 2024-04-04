@@ -8,7 +8,7 @@ import {z} from "zod";
 import {response} from "@/lib/responses";
 
 const schema = z.object({
-    username: z.string().min(4).max(64),
+    username: z.string().min(4).max(64).regex(/^[A-Za-z0-9@#$%^&*()-_=+:;,./<>?]+$/),
     password: z.string().max(32)
 })
 
