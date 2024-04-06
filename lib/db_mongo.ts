@@ -59,7 +59,7 @@ export async function getPortfolio(_id: string): Promise<any> {
     const portfolio = await portfolios_collection.findOne({ _id: new ObjectId(_id) });
 
     await client.close();
-    return portfolio;
+    return portfolio?.portfolio;
 }
 
 export async function updateUserStock(_id: string, stock: string, quantity: number): Promise<any> {
@@ -80,7 +80,7 @@ export async function getTransactions(_id: string): Promise<any> {
     const transactions = await transactions_collection.findOne({ _id: new ObjectId(_id) });
 
     await client.close();
-    return transactions;
+    return transactions?.transactions;
 }
 
 export async function addTransactions(_id: string, transaction: any): Promise<any> {

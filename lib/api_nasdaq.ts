@@ -7,17 +7,42 @@ async function getDailyStockData(symbol: string, fromdate: string, todate: strin
     const data = await response.json();
 
     const chart = data.data.chart;
-    let stockData = {}
+
+    let stockData: { [key: string]: number } = {}; // Explicitly define the type of stockData
+
     for (let i = 0; i < chart.length; i++) {
-        chart[i].date = chart[i].date.substring(0, 10);
+        stockData[convertDateFormat(chart[i].z.dateTime)] = chart[i].y;
     }
-    return data;
+    return stockData;
 }
 
-async function getDailyStockValue(_id: string, symbol: string, date: string): Promise<any> {
-    
+async function getDailyStockValue(_id: string, symbol: string, days: number = 30, ): Promise<any> {}
+
+export async function getDailyPortfolioValue(_id: string, days: number = 30): Promise<any> {
+    const portfolio = await getPortfolio(_id);
+    const transactions = await getTransactions(_id);
+
+    let portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
+    for (let i = 0; i < portfolio.length; i++) {
+        const symbol = portfolio[i].symbol;
+        const price = portfolio[i].price;
+        const amount = portfolio[i].amount;
+        const date = portfolio[i].date;
+        
+        
+    } 
+
+    let portfolioValue = 0;
+    for (const [symbol, quantity] of portfolio) {
+        const stockData = await getDailyStockValue(_id, symbol, date, );
+        portfolioValue += stockData[symbol] * quantity;
+    }
+    return portfolioValue;
 }
 
-export async function getDailyPortfolioValue(): Promise<any> {}
+async function getDailyPorfolioData(): Promise<any> {}
 
-async function getDailyPorfolioData()
+function convertDateFormat(inputDate: string): string {
+    const [month, day, year] = inputDate.split('/');
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
