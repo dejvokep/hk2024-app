@@ -1,15 +1,17 @@
-import {verifyRequestOrigin} from "lucia";
-import {NextResponse} from "next/server";
-import type {NextRequest} from "next/server";
+import {getSession} from '@auth0/nextjs-auth0/edge';
+import {NextRequest, NextResponse} from "next/server";
 
-export async function middleware(request: NextRequest): Promise<NextResponse> {
-    if (request.method === "GET")
-        return NextResponse.next();
+export default async function middleware(req: NextRequest) {
+    const res = NextResponse.next()
+    const user = await getSession();
 
-    const originHeader = request.headers.get("Origin");
-    const hostHeader = request.headers.get("Host"); // `X-Forwarded-Host` may need to be used
+    console.log(req.nextUrl.host)
+    if (!user)
+        return NextResponse.redirect(req.nextUrl.host)
 
-    if (!originHeader || !hostHeader || !verifyRequestOrigin(originHeader, [hostHeader]))
-        return new NextResponse(null, {status: 403});
-    return NextResponse.next();
+    return res
 }
+
+export const config = {
+    matcher: '/(zone.*)'
+};
