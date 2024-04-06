@@ -1,0 +1,11 @@
+_id: string # user id supplied by auth0
+transactions:
+  [
+    {
+      symbol: string,
+      amount: float, # positive for buy, negative for sell
+      price: float,
+      date: date,
+    }
+  ]
+
