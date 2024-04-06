@@ -1,7 +1,7 @@
 import {getSession} from '@auth0/nextjs-auth0/edge';
-import {NextRequest, NextResponse} from "next/server";
+import {NextFetchEvent, NextRequest, NextResponse} from "next/server";
 
-export default async function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest, event: NextFetchEvent) {
     const res = NextResponse.next()
     const user = await getSession();
 
