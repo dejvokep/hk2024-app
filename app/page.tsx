@@ -14,7 +14,7 @@ export default async function Home() {
         <main className={"flex justify-center w-full min-h-screen py-[100px]"}>
             <div className={"flex flex-col justify-between"}>
                 <Logo className={"fill-primary h-32 mx-auto"}/>
-                <Button className={"min-w-[300px] py-6"} asChild>
+                <Button className={"min-w-[320px] py-6"} asChild>
                     <Link href={"/api/auth/login"}>Login</Link>
                 </Button>
             </div>

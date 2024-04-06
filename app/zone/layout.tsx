@@ -1,8 +1,4 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import Menu from "@/components/menu/Menu";
-import {UserProvider} from "@auth0/nextjs-auth0/client";
 
 export default function ZoneLayout({
   children,
@@ -10,8 +6,8 @@ export default function ZoneLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-        <Menu />
+    <main className={"mt-8 px-8 mb-16"}>
+      <Menu />
       {children}
     </main>
   );
