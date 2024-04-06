@@ -1,0 +1,5 @@
+_id: string # user id supplied by auth0
+portfolio:
+  {
+    string: float # symbol: amount
+  }
