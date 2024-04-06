@@ -9,16 +9,16 @@ export async function getCurrentStockPrice(symbol: string): Promise<number> {
 
 export async function getDailyStockData(symbol: string, fromdate: string, todate: string): Promise<any> {
     // date format: yyyy-mm-dd
-    const url = `https://api.nasdaq.com/api/quote/${symbol}/chart?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
+    const url = `https://api.nasdaq.com/api/quote/${symbol}/historical?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
 
-    const chart = data.data.chart;
+    const chart = data.data.tradesTable.rows;
 
     let stockData: { [key: string]: number } = {}; // Explicitly define the type of stockData
 
     for (let i = 0; i < chart.length; i++) {
-        stockData[convertDateFormat(chart[i].z.dateTime)] = chart[i].y;
+        stockData[convertDateFormat(chart[i].date)] = chart[i].close;
     }
     return stockData;
 }
