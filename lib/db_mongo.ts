@@ -92,3 +92,13 @@ export async function addTransactions(_id: string, transaction: any): Promise<an
 
     await client.close();
 }
+
+export async function updateQuestionnaire(_id: string, q: any): Promise<any> {
+    await client.connect();
+    const db = client.db("users");
+
+    const portfolios_collection = db.collection("info");
+    await portfolios_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { "questionnaire": q } });
+
+    await client.close();
+}

@@ -25,3 +25,17 @@ export const TIME_SPANS = {
         mod: (d: Date) => d.setFullYear(d.getFullYear() - 1)
     },
 }
+
+export type OnboardingData = {
+    experience?: string,
+    length?: string,
+    investment?: string,
+    risk?: string,
+    interests?: Industries[],
+    goal?: {
+        name?: string,
+        value?: number
+    }
+}
+
+export type Industries = "INDUSTRIAL" | "TECHNOLOGY" | "ENERGY" | "REAL_ESTATE" | "FINANCE" | "HEALTHCARE" | "CONSUMER_DISCRETIONARY" | "MATERIALS" | "CONSUMER_STAPLES" | "UTILITIES" | "TELECOMMUNICATIONS";
