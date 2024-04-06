@@ -19,7 +19,7 @@ export default function Graph({v, className}: {v: {[key: string]: number}, class
                 if (i+1 === vals.length)
                     return null
 
-                return <line key={i} x1={i * w / (vals.length-1)} y1={getY(p)} x2={(i+1) * w / (vals.length-1)} y2={getY(vals[i+1])} className={"stroke-secondary"}/>
+                return <line key={i} x1={i * w / (vals.length-1)} y1={getY(p)} x2={(i+1) * w / (vals.length-1)} y2={getY(vals[i+1])}/>
             })}
         </svg>
         <div className={cn(className, "absolute top-0 left-0 bg-gradient-to-r from-[#000000FF] to-[#FFFFFF00]")}>

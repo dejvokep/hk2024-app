@@ -1,8 +1,9 @@
 import {useMemo} from "react";
 import {getCurrentStockPrice, getDailyStockData} from "@/lib/api_nasdaq";
 import Graph from "@/components/graph/graph";
+import {cn} from "@/lib/utils";
 
-export default async function ShareItem({trans, code, amount}: {trans: Array<{symbol: string, amount: number, price: number}>, code: string, amount: number}) {
+export default async function ShareItem({trans, code, amount, price}: {price: number, trans: Array<{symbol: string, amount: number, price: number}>, code: string, amount: number}) {
     const first = useMemo(() => {
         return trans.find(t => t.symbol === code)
     }, [code, trans])
@@ -17,7 +18,6 @@ export default async function ShareItem({trans, code, amount}: {trans: Array<{sy
         return s.substring(0, s.indexOf("T"))
     }
 
-    const price = await getCurrentStockPrice(code)
     const graph = await getDailyStockData(code, getDate(7), getDate(0))
 
     const value = amount * price, original = amount * (first.price / first.amount)
@@ -25,12 +25,12 @@ export default async function ShareItem({trans, code, amount}: {trans: Array<{sy
     return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm" style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
             <div className="font-bold my-auto">{code}</div>
             <div className={"my-auto"}>€{value.toFixed(2)}</div>
-            <div className="my-auto text-xs tracking-normal text-secondary text-opacity-40">
+            <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>
                 {value >= original ? "+" : "-"}{Math.abs(value - original).toFixed(2)}
             </div>
-            <div className="my-auto text-xs tracking-normal text-secondary text-opacity-40">
+            <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>
                 ({value >= original ? "+" : "-"}{(value >= original ? (value * 100 / original)-100 : 100-(value * 100 / original)).toFixed(2)}%)
             </div>
-        <Graph v={graph} className={"h-8 w-16"}/>
+        <Graph v={graph} className={cn("h-8 w-16", value >= original ? "stroke-secondary" : "stroke-destructive")}/>
     </div>
 }
