@@ -11,6 +11,7 @@ import Q6 from "@/components/onboarding/Q6";
 import Loading from "@/app/loading";
 import {useRouter} from "next/navigation";
 import {cn} from "@/lib/utils";
+import Link from "next/link";
 
 export default function Page() {
     const [api, setApi] = useState<CarouselApi>()
@@ -63,6 +64,9 @@ export default function Page() {
     return <div className={"relative"}>
         {current !== 0 && <div className={"absolute top-[20px] left-[20px] z-10"} onClick={() => api?.scrollPrev()}>
             <p className={"text-muted"}>Back</p>
+        </div>}
+        {current === 0 && <div className={"absolute top-[20px] left-[20px] z-10"}>
+            <Link href={"/zone"} className={"text-muted"}>Quit</Link>
         </div>}
         {current === 4 && <div className={"absolute top-[20px] right-[20px] z-10"} onClick={() => api?.scrollNext()}>
             <p className={"text-muted"}>Next</p>
