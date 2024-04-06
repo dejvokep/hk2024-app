@@ -98,7 +98,7 @@ export async function updateQuestionnaire(_id: string, q: any): Promise<any> {
     const db = client.db("users");
 
     const portfolios_collection = db.collection("info");
-    await portfolios_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { "questionnaire": q } });
+    await portfolios_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { "questionnaire": q } }, {upsert: true});
 
     await client.close();
 }
