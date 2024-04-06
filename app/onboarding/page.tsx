@@ -46,6 +46,7 @@ export default function Page() {
         fetch("/api/questionnaire", {
             method: "POST",
             body: JSON.stringify({
+                interests: [],
                 ...data,
                 ...o
             })
