@@ -1,7 +1,7 @@
 import {cn} from "@/lib/utils";
 
 export default function Graph({v, className}: {v: {[key: string]: number}, className: string}) {
-    const vals = Object.values(v),
+    const vals = Object.entries(v).sort((a,b) => a[0].localeCompare(b[0])).map(x => x[1]),
         min = Math.min.apply(null, vals), max = Math.max.apply(null, vals)
 
     function getY(p: number) {
