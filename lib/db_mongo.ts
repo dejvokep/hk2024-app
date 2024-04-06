@@ -51,7 +51,7 @@ export async function getUserInfo(_id: string): Promise<any> {
     return info;
 }
 
-export async function getUserPortfolio(_id: string): Promise<any> {
+export async function getPortfolio(_id: string): Promise<any> {
     await client.connect();
     const db = client.db();
 
