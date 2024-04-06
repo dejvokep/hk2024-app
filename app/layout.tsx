@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Menu from "@/components/menu/Menu";
 import {UserProvider} from "@auth0/nextjs-auth0/client";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "HK2024 app",
-  description: "HackKosice 2024 web app.",
+  title: "TB Investing",
+  description: "Tatra banka investing app for HK2024.",
 };
 
 export default function RootLayout({
