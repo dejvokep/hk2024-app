@@ -18,18 +18,19 @@ async function getDailyStockData(symbol: string, fromdate: string, todate: strin
 
 async function getDailyStockValue(_id: string, symbol: string, days: number = 30, ): Promise<any> {}
 
-export async function getDailyPortfolioValue(_id: string, days: number = 30): Promise<any> {
+export async function getDailyPortfolioValue(_id: string, fromdate: string, todate: string): Promise<any> {
     const portfolio = await getPortfolio(_id);
     const transactions = await getTransactions(_id);
+    const from = new Date(fromdate);
 
-    let portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
+    const portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
     for (let i = 0; i < portfolio.length; i++) {
         const symbol = portfolio[i].symbol;
         const price = portfolio[i].price;
         const amount = portfolio[i].amount;
         const date = portfolio[i].date;
         
-        
+
     } 
 
     let portfolioValue = 0;
