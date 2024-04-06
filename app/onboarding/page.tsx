@@ -10,6 +10,7 @@ import Q5 from "@/components/onboarding/Q5";
 import Q6 from "@/components/onboarding/Q6";
 import Loading from "@/app/loading";
 import {useRouter} from "next/navigation";
+import {cn} from "@/lib/utils";
 
 export default function Page() {
     const [api, setApi] = useState<CarouselApi>()
@@ -88,5 +89,8 @@ export default function Page() {
                 </CarouselItem>
             </CarouselContent>
         </Carousel>
+        <div className={"fixed bottom-0 left-0 w-full flex flex-row gap-x-1"}>
+            {[0, 1, 2, 3, 4, 5].map(i => <div key={i} className={cn("h-[2px] grow", i <= current ? "bg-white" : "bg-muted")}></div>)}
+        </div>
     </div>
 }
