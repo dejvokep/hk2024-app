@@ -21,8 +21,8 @@ export default async function Page() {
     }
 
     return <div>
-        <div className="flex flex-col pt-10 mx-auto w-full bg-black max-w-[480px]">
-            <PortfolioGraph graph={{}} />
+        <div className="flex flex-col pt-10 mx-auto w-full bg-black max-w-[480px] pb-[100px]">
+            <PortfolioGraph portfolio={portfolio} prices={prices} />
             <ShareList trans={trans} portfolio={portfolio} prices={prices} />
             <Controls />
         </div>

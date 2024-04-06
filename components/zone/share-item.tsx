@@ -5,11 +5,8 @@ import {cn} from "@/lib/utils";
 
 export default async function ShareItem({trans, code, amount, price}: {price: number, trans: Array<{symbol: string, amount: number, price: number}>, code: string, amount: number}) {
     const first = useMemo(() => {
-        return trans.find(t => t.symbol === code)
+        return trans.find(t => t.symbol === code) || {price: price*amount, amount: amount}
     }, [code, trans])
-
-    if (!first)
-        return null
 
     function getDate(sub: number) {
         const d = new Date()
