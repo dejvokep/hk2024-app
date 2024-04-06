@@ -2,7 +2,7 @@ import Link from "next/link";
 import MenuItem from "@/components/menu/MenuItem";
 
 export default function Menu() {
-    return <header className={"w-full fixed top-0 bg-white bg-opacity-95 p-3 px-32 flex justify-between align-middle border border-b-black z-10"}>
+    return <header className={"w-full fixed top-0 bg-opacity-95 p-3 px-32 flex justify-between align-middle bg-card border-b border-b-secondary z-10"}>
         <div>
             <h1><Link href={"/"}>HK2024</Link></h1>
         </div>
