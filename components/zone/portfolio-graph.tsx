@@ -4,7 +4,7 @@ import {useState} from "react";
 import {TIME_SPANS} from "@/lib/types";
 import ExpandedSelect from "@/components/ui/expanded-select";
 
-export default function PortfolioGraph() {
+export default function PortfolioGraph({graph}: {graph: object}) {
     const [span, setSpan] = useState<keyof typeof TIME_SPANS>("1D")
 
     return <div>

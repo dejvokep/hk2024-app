@@ -4,10 +4,10 @@ export async function getCurrentStockPrice(symbol: string): Promise<number> {
     const url = `https://api.nasdaq.com/api/quote/${symbol}/info?assetclass=stocks`;
     const response = await fetch(url);
     const data = await response.json();
-    return data.data.primaryData.lastSalePrice;
+    return data.data.primaryData.lastSalePrice.substring(1);
 }
 
-async function getDailyStockData(symbol: string, fromdate: string, todate: string): Promise<any> {
+export async function getDailyStockData(symbol: string, fromdate: string, todate: string): Promise<any> {
     // date format: yyyy-mm-dd
     const url = `https://api.nasdaq.com/api/quote/${symbol}/chart?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
     const response = await fetch(url);
