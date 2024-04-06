@@ -6,6 +6,7 @@ client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 history = [
     {"role": "system", "content": "You are an intelligent financial assistant called Tatran. You always provide well-reasoned answers that are both correct and helpful."},
+    {"role": "system", "content": "You are designed to assist users with their financial needs, such as budgeting, investing, and saving."},
     {"role": "user", "content": "Hello, introduce yourself to someone opening this program for the first time as Tatran, ai representative of TatraBanka. Be concise."},
 ]
 
@@ -25,14 +26,6 @@ while True:
             new_message["content"] += chunk.choices[0].delta.content
 
     history.append(new_message)
-    
-    # Uncomment to see chat history
-    # import json
-    # gray_color = "\033[90m"
-    # reset_color = "\033[0m"
-    # print(f"{gray_color}\n{'-'*20} History dump {'-'*20}\n")
-    # print(json.dumps(history, indent=2))
-    # print(f"\n{'-'*55}\n{reset_color}")
 
     print()
     history.append({"role": "user", "content": input("> ")})
