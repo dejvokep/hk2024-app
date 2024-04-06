@@ -90,7 +90,7 @@ export default function Page() {
             </CarouselContent>
         </Carousel>
         <div className={"fixed bottom-0 left-0 w-full flex flex-row gap-x-1"}>
-            {[0, 1, 2, 3, 4, 5].map(i => <div key={i} className={cn("h-[2px] grow", i <= current ? "bg-white" : "bg-muted")}></div>)}
+            {[0, 1, 2, 3, 4, 5].map(i => <div key={i} className={cn("h-[2px] grow", i <= current ? "bg-white" : "bg-muted")} style={{boxShadow: i <= current ? "0 0 4 0 #FFFFFF" : ""}}></div>)}
         </div>
     </div>
 }
