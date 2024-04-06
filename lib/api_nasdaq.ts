@@ -32,20 +32,29 @@ export async function getDailyPortfolioValue(_id: string, days: number = 30): Pr
     const fromdate = shiftDate(todate, -days);
 
     const portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
-    for (let i = 0; i < portfolio.length; i++) {
-        portfolioBacktrack[portfolio.symbol] = {[convertDateToString(todate)] : portfolio.amount};
+    for (const key in portfolio){
+        portfolioBacktrack[key] = {};
+        for (let d = 0; d < days; d++)
+                portfolioBacktrack[key][convertDateToString(shiftDate(todate, d))] = portfolio.amount;
     }
 
-    for (let i = 0; i < portfolio.length; i++) {
-        const symbol = portfolio[i].symbol;
-        const price = portfolio[i].price;
-        const amount = portfolio[i].amount;
-        const date = new Date(portfolio[i].date);
+    let currentDate = todate;
+    for (let i = transactions.length - 1; i >= 0 ; i--) {
+        const symbol = transactions[i].symbol;
+        const price = transactions[i].price;
+        const amount = transactions[i].amount;
+        const date = new Date(transactions[i].date);
         
-        if (date < fromdate) {
-            break;
+        portfolioBacktrack[transactions.symbol]
+        if (date <= currentDate) {
+            portfolioBacktrack[symbol][convertDateToString(date)] = amount;
         }
+        else if (date < fromdate)
+            break;
+        else {}
     } 
+
+    
 
     let portfolioValue = 0;
     for (const [symbol, quantity] of portfolio) {
