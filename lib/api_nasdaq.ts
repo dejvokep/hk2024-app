@@ -29,8 +29,7 @@ export async function getDailyPortfolioValue(_id: string, days: number = 30): Pr
     const portfolio = await getPortfolio(_id);
     const transactions = await getTransactions(_id);
     const todate = new Date();
-    const fromdate = new Date();
-    fromdate.setDate(todate.getDate() - 30);
+    const fromdate = shiftDate(todate, -days);
 
     const portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
     for (let i = 0; i < portfolio.length; i++) {
@@ -41,9 +40,11 @@ export async function getDailyPortfolioValue(_id: string, days: number = 30): Pr
         const symbol = portfolio[i].symbol;
         const price = portfolio[i].price;
         const amount = portfolio[i].amount;
-        const date = portfolio[i].date;
+        const date = new Date(portfolio[i].date);
         
-
+        if (date < fromdate) {
+            break;
+        }
     } 
 
     let portfolioValue = 0;
@@ -65,4 +66,10 @@ function convertDateToString(inputDate: Date): string {
     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
     const day = inputDate.getDate().toString().padStart(2, '0');
     return `${inputDate.getFullYear()}-${month}-${day}`;
+}
+
+function shiftDate(inputDate: Date, days: number): Date {
+    const date = new Date(inputDate);
+    date.setDate(date.getDate() + days);
+    return date;
 }
