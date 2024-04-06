@@ -1,5 +1,5 @@
 export default function Controls() {
-    return <div className="fixed bottom-[80px] flex z-10 gap-5 self-stretch px-5 py-1.5 text-base">
+    return <div className="w-full fixed bottom-[80px] flex z-10 gap-5 self-stretch px-5 py-1.5 text-base">
         <div className="flex-1 justify-center px-16 py-4 text-black bg-white rounded-xl shadow-sm" style={{boxShadow: "inset 0 -3px 4px 0 rgba(0, 0, 0, 0.25)"}}>
             Buy
         </div>
