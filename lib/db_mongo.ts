@@ -5,7 +5,7 @@ const client = new MongoClient(process.env.MONGO_URI || "");
 
 export async function createUser(_id: string, email: string, name: string, surname: string, balance: number = 0, questionnaire: Map<string, any> = new Map, portfolio: Map<string, number> = new Map, transactions: [] = []): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const info_collection = db.collection("userdata");
     await info_collection.insertOne({ _id: new ObjectId(_id), email, name, surname, balance, questionnaire});
@@ -21,7 +21,7 @@ export async function createUser(_id: string, email: string, name: string, surna
 
 export async function updateUserQuestionnaire(_id: string, questionnaire: Map<string, any>): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const info_collection = db.collection("userdata");
     await info_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { questionnaire } });
@@ -31,7 +31,7 @@ export async function updateUserQuestionnaire(_id: string, questionnaire: Map<st
 
 export async function getUserQuestionnaire(_id: string): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const info_collection = db.collection("userdata");
     const info = await info_collection.findOne({ _id: new ObjectId(_id) });
@@ -42,7 +42,7 @@ export async function getUserQuestionnaire(_id: string): Promise<any> {
 
 export async function getUserInfo(_id: string): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const info_collection = db.collection("userdata");
     const info = await info_collection.findOne({ _id: new ObjectId(_id) });
@@ -53,7 +53,7 @@ export async function getUserInfo(_id: string): Promise<any> {
 
 export async function getPortfolio(_id: string): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const portfolios_collection = db.collection("portfolios");
     const portfolio = await portfolios_collection.findOne({ _id: new ObjectId(_id) });
@@ -64,7 +64,7 @@ export async function getPortfolio(_id: string): Promise<any> {
 
 export async function updateUserStock(_id: string, stock: string, quantity: number): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const portfolios_collection = db.collection("portfolios");
     await portfolios_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { [stock]: quantity } });
@@ -74,7 +74,7 @@ export async function updateUserStock(_id: string, stock: string, quantity: numb
 
 export async function getTransactions(_id: string): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const transactions_collection = db.collection("transactions");
     const transactions = await transactions_collection.findOne({ _id: new ObjectId(_id) });
@@ -85,7 +85,7 @@ export async function getTransactions(_id: string): Promise<any> {
 
 export async function addTransactions(_id: string, transaction: any): Promise<any> {
     await client.connect();
-    const db = client.db();
+    const db = client.db("users");
 
     const transactions_collection = db.collection("transactions");
     await transactions_collection.updateOne({ _id: new ObjectId(_id) }, { $push: { transactions: transaction } });

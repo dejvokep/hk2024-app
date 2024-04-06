@@ -29,10 +29,12 @@ export async function getDailyPortfolioValue(_id: string, days: number = 30): Pr
     const portfolio = await getPortfolio(_id);
     const transactions = await getTransactions(_id);
     const todate = new Date();
+    const fromdate = new Date();
+    fromdate.setDate(todate.getDate() - 30);
 
     const portfolioBacktrack: { [key: string]: {[key: string]: number} } = {};
     for (let i = 0; i < portfolio.length; i++) {
-        portfolioBacktrack[portfolio.symbol] = {[convertDateToString(todate)] : portfolio[i].price, amount: portfolio[i].amount};
+        portfolioBacktrack[portfolio.symbol] = {[convertDateToString(todate)] : portfolio.amount};
     }
 
     for (let i = 0; i < portfolio.length; i++) {
