@@ -44,7 +44,7 @@ export async function getUserInfo(_id: string): Promise<any> {
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
+    const info_collection = db.collection("info");
     const info = await info_collection.findOne({ _id: new ObjectId(_id) });
 
     await client.close();
