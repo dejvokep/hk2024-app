@@ -14,3 +14,6 @@ Investing should be a part of everyday life, so it should also be enjoyable, rig
  - Tomáš Hutňan
  - Dávid Kepič
  - Adrián Mikolaj
+
+## Repositories
+ - AI recommendations - https://github.com/Carrrotka/Moj-Folder
