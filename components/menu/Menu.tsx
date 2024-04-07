@@ -8,7 +8,7 @@ export default function Menu() {
         <MenuItem link={"/zone"} label={"Portfolio"} icon={c => <AreaChart className={c}/>}/>
         <MenuItem link={"/zone/search"} label={"Search"} icon={c => <Search className={c}/>}/>
         <MenuItem link={"/zone/exchange"} label={"Exchange"} icon={c => <ArrowRightLeft className={c}/>}/>
-        <MenuItem link={"/api/auth/logout"} label={"News"} icon={c=> <Newspaper className={c}/>}/>
+        <MenuItem link={"/zone/news"} label={"News"} icon={c=> <Newspaper className={c}/>}/>
         <MenuItem link={"/zone/community"} label={"Community"} icon={c => <UsersRound className={c}/>}/>
     </header>
 }
