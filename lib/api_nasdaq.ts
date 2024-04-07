@@ -15,6 +15,9 @@ export async function getDailyStockData(symbol: string, fromdate: string, todate
 
     const chart = data.data.tradesTable.rows;
 
+    if (!chart)
+        return []
+
     let stockData: { [key: string]: number } = {}; // Explicitly define the type of stockData
 
     for (let i = 0; i < chart.length; i++) {
