@@ -44,14 +44,14 @@ export async function getUserInfo(_id: string): Promise<any> {
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
+    const info_collection = db.collection("info");
     const info = await info_collection.findOne({ _id: new ObjectId(_id) });
 
     await client.close();
     return info;
 }
 
-export async function getPortfolio(_id: string): Promise<any> {
+export async function getPortfolio(_id: string): Promise<{[key: string]: number}> {
     await client.connect();
     const db = client.db("users");
 
@@ -60,6 +60,17 @@ export async function getPortfolio(_id: string): Promise<any> {
 
     await client.close();
     return portfolio?.portfolio;
+}
+
+export async function getHistory(_id: string): Promise<Array<{date: string, value: number}>> {
+    await client.connect();
+    const db = client.db("users");
+
+    const portfolios_collection = db.collection("portfolios");
+    const portfolio = await portfolios_collection.findOne({ _id: new ObjectId(_id) });
+
+    await client.close();
+    return portfolio?.history;
 }
 
 export async function updateUserStock(_id: string, stock: string, quantity: number): Promise<any> {
@@ -89,6 +100,16 @@ export async function addTransactions(_id: string, transaction: any): Promise<an
 
     const transactions_collection = db.collection("transactions");
     await transactions_collection.updateOne({ _id: new ObjectId(_id) }, { $push: { transactions: transaction } });
+
+    await client.close();
+}
+
+export async function updateQuestionnaire(_id: string, q: any): Promise<any> {
+    await client.connect();
+    const db = client.db("users");
+
+    const portfolios_collection = db.collection("info");
+    await portfolios_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { "questionnaire": q } }, {upsert: true});
 
     await client.close();
 }

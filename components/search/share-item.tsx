@@ -1,12 +1,18 @@
-import {useMemo} from "react";
-import {getCurrentStockPrice, getDailyStockData} from "@/lib/api_nasdaq";
+"use client";
+
 import Graph from "@/components/graph/graph";
 import {cn} from "@/lib/utils";
+import useFetch from "@/lib/hooks/useFetch";
 
-export default async function ShareItem({trans, code, amount, price}: {price: number, trans: Array<{symbol: string, amount: number, price: number}>, code: string, amount: number}) {
-    const first = useMemo(() => {
-        return trans.find(t => t.symbol === code) || {price: price*amount, amount: amount}
-    }, [code, trans])
+export default function ShareItem({code, price}: {price: number, code: string}) {
+    const f = useFetch<{[key: string]: number}>("/api/stock/daily", {
+        method: "POST",
+        body: JSON.stringify({
+            code,
+            from: getDate(7),
+            to: getDate(0)
+        })
+    })
 
     function getDate(sub: number) {
         const d = new Date()
@@ -15,9 +21,22 @@ export default async function ShareItem({trans, code, amount, price}: {price: nu
         return s.substring(0, s.indexOf("T"))
     }
 
-    const graph = await getDailyStockData(code, getDate(7), getDate(0))
+    if (f.loading) {
+        return <p>Loading...</p>
+    }
 
-    const value = amount * price, original = amount * (first.price / first.amount)
+    if (f.error || !f.data) {
+        return <p>Error!</p>
+    }
+
+    const value = price
+    let origDate = "9999-99-99"
+
+    for (const k of Object.keys(f.data)) {
+        if (k < origDate)
+            origDate = k
+    }
+    const original = f.data[origDate]
 
     return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm" style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
             <div className="font-bold my-auto">{code}</div>
@@ -28,6 +47,6 @@ export default async function ShareItem({trans, code, amount, price}: {price: nu
             <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>
                 ({value >= original ? "+" : "-"}{(value >= original ? (value * 100 / original)-100 : 100-(value * 100 / original)).toFixed(2)}%)
             </div>
-        <Graph v={graph} className={cn("h-8 w-16", value >= original ? "stroke-secondary" : "stroke-destructive")}/>
+        <Graph v={f.data} className={cn("h-8 w-16", value >= original ? "stroke-secondary" : "stroke-destructive")}/>
     </div>
 }
