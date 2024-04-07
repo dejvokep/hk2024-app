@@ -6,6 +6,7 @@ import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import SymbolFetcher from "@/components/search/symbol-fetcher";
 
+// @ts-ignore
 export const SCHEMA = z.object({
     text: z.string().min(2).max(8)
 })

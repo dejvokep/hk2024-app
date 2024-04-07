@@ -39,3 +39,17 @@ export type OnboardingData = {
 }
 
 export type Industries = "INDUSTRIAL" | "TECHNOLOGY" | "ENERGY" | "REAL_ESTATE" | "FINANCE" | "HEALTHCARE" | "CONSUMER_DISCRETIONARY" | "MATERIALS" | "CONSUMER_STAPLES" | "UTILITIES" | "TELECOMMUNICATIONS";
+
+export const IndustryMappers = {
+    "INDUSTRIAL": "Industrial",
+"TECHNOLOGY": "Technology",
+"ENERGY": "Energy",
+"REAL_ESTATE": "Real Estate",
+"FINANCE": "Finance",
+"HEALTHCARE": "Health Care",
+"CONSUMER_DISCRETIONARY": "Consumer Discretionary",
+"MATERIALS": "Materials",
+"CONSUMER_STAPLES": "Consumer Staples",
+"UTILITIES": "Utilities",
+"TELECOMMUNICATIONS": "Telecommunications"
+}
