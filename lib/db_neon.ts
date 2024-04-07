@@ -48,7 +48,8 @@ export async function getRecomendations(intrests:Array<Industries>,risk:any,leng
         popularity_weight += 0.2
     }
 
-    intrests.push("HEALTHCARE")
+    // @ts-ignore
+    intrests.push("DUMMY")
 
     const result = await sql(`SELECT symbol AS code,name, CASE WHEN sector IN (${intrests.map(i => `'${IndustryMappers[i as Industries]}'`).join(",")}) THEN (ai_rating * ${ai_weight} + popularity_rating * ${popularity_weight}) * 1.3 ELSE (ai_rating * ${ai_weight} + popularity_rating * ${popularity_weight}) END AS recommendation FROM nasdaq WHERE ai_rating IS NOT NULL ORDER BY recommendation DESC LIMIT ${ammount};`)
     return result.rows
