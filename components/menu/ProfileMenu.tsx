@@ -10,7 +10,7 @@ export default function ProfileMenu() {
     const session = useUser()
     const pathname = usePathname()
 
-    if (pathname === "/zone/settings")
+    if (pathname === "/zone/settings" || pathname === "/zone/community")
         return null
 
     return <header className={"fixed left-0 top-0 p-5 flex w-full flex-row justify-between bg-black z-50"}>
