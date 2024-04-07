@@ -10,7 +10,7 @@ export async function createUser(_id: string, email: string, name: string, surna
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
+    const info_collection = db.collection("info");
     await info_collection.insertOne({ _id: new ObjectId(_id), email, name, surname, balance});
 
     const portfolios_collection = db.collection("portfolios");
@@ -26,7 +26,7 @@ export async function updateUserQuestionnaire(_id: string, questionnaire: Map<st
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
+    const info_collection = db.collection("info");
     await info_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { questionnaire } });
 
     await client.close();

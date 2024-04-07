@@ -103,11 +103,13 @@ export default async function Page() {
                         <div
                             className="border-solid border-[#2d2d2d] border p-5 flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
                         >
-                            <Link href={"/onboarding"}><div
-                                className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
-                            >
-                                Settings
-                            </div></Link>
+                            <Link href={"/onboarding"}>
+                                <div
+                                    className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
+                                >
+                                    Settings
+                                </div>
+                            </Link>
                         </div>
                         <div
                             className="border-solid border-[#2d2d2d] border p-5 flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
@@ -116,15 +118,6 @@ export default async function Page() {
                                 className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
                             >
                                 Notifications
-                            </div>
-                        </div>
-                        <div
-                            className="border-solid border-[#2d2d2d] border p-5 flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
-                        >
-                            <div
-                                className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
-                            >
-                                Language
                             </div>
                         </div>
                         <div
