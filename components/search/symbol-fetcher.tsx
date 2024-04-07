@@ -3,7 +3,7 @@ import {z} from "zod";
 import {SCHEMA} from "@/app/zone/search/page";
 import {useEffect, useState} from "react";
 import ShareList from "@/components/search/share-list";
-import {LoaderCircle} from "lucide-react";
+import {AreaChart, Flame, LoaderCircle} from "lucide-react";
 import Recommendations from "@/components/zone/recommendations";
 
 export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SCHEMA>> }) {
@@ -78,8 +78,18 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
         </div>
     }
 
+    if (data.list.length <= 3) {
+        return <div>
+            <p className={"text-white text-sm font-bold inline-flex justify-center"}><Flame className={"h-4 w-4 mr-2"} />Community trending</p>
+            <ShareList prices={data.list}/>
+        </div>
+    }
+
     return <div>
-        <p className={"text-white text-sm font-bold"}>Stocks & ETFs</p>
-        <ShareList prices={data.list}/>
+        <p className={"text-white text-sm font-bold inline-flex justify-center"}><Flame className={"h-4 w-4 mr-2"}/>Community
+            trending</p>
+        <ShareList prices={data.list.slice(0, 3)}/>
+        <p className={"text-white text-sm font-bold mt-6 inline-flex justify-center"}><AreaChart className={"h-4 w-4 mr-2"}/>Stocks & ETFs</p>
+        <ShareList prices={data.list.slice(3)}/>
     </div>
 }
