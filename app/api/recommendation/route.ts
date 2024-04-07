@@ -7,7 +7,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const session = await getSession()
     if (!session)
         return new NextResponse(undefined, {status: 403})
-
+    return new NextResponse(JSON.stringify([]), {status: 200})
+/*
     const info = await getUserInfo(session.user.sub.substring(6))
 
     if (!info.questionnaire)
@@ -15,4 +16,4 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const q = info.questionnaire
     return new NextResponse(JSON.stringify(await getRecomendations(q.interests ? q.interests : [], q.risk, q.length, 10)), {status: 200})
-}
+*/}
