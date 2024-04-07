@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { code: string } }) {
             <p className={"text-xs text-muted"}>{info.code} - STOCK - US</p>
         </div>
         <div className={"absolute top-0"}>
-            <Link href={"/search"}><ChevronLeft className={"h-8"}/></Link>
+            <Link href={"/zone/search"}><ChevronLeft className={"h-8"}/></Link>
         </div>
         <div className={"pt-16"}>
             <StockGraph sum={info.price} code={params.code}/>
