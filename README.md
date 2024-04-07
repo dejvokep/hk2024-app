@@ -3,7 +3,7 @@ This repository is to show the cool project you created.
 To make it easier to present, we created this sample, which you can edit and use for your HK project.
 -->
 
-![image](.template_images/Top.png)
+![image](.showcase_images/Top.png)
 
 <p align="center">
   <a href="https://hackkosice.com">
@@ -17,40 +17,24 @@ To make it easier to present, we created this sample, which you can edit and use
 In the next part, we recommend displaying all important shields for your project: https://github.com/badges/shields
 -->
 
-[![All Contributors](https://img.shields.io/github/contributors/hackkosice/i-demoed-hk24?style=flat-square)](https://github.com/hackkosice/i-demoed-hk24/graphs/contributors)
-[![Activity](https://img.shields.io/github/commit-activity/m/hackkosice/i-demoed-hk24?style=flat-square)](https://github.com/hackkosice/i-demoed-hk24/pulse)  
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
+[![All Contributors](https://img.shields.io/github/contributors/hackkosice/i-demoed-hk24?style=flat-square)](https://github.com/dejvokep/hk2024-app/graphs/contributors)
+[![Activity](https://img.shields.io/github/commit-activity/m/dejvokep/hk2024-app?style=flat-square)](https://github.com/hackkosice/i-demoed-hk24/pulse)  
 
 
 
-A quick short description of what this project is about. It should be explained in
-3 - 4 four sentences to catch the eye of the viewer of the Githu repository. 
-It can contain some technologies, and what is the outcome of the project.
+Hi, Welcome to TatrInvest!
+We are glad you decided to us to be your guides troughout your investing journey! Let us show you what we can help you with.
 
-![image](.template_images/Mid.png)
+TatrInvest allows you to easily buy and sell stocks from all over the world with just a few clicks. If you are unsure of what to buy DONT WORRY! we have you covered. Tatran is our AI financial advisor. Tatran is using cutting edge machine learning combined and society behavorial analisis combined with your instrests to create a financial strategy that will make you enjoy managing your finances. He listens to feedback from you and changes his strategies acording to your wishes!
 
-
-## Other Project repositories
-
-<!--
-If your project is constructed out of multiple Repositories, you can specify them here:
--->
-
-## Documentation
-
-<!--
-Documentation is a crucial part of every project, but also maybe during the hackathon, you did not have time to create it. We recommend coming back later and filling in this part, for example, with https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis
--->
+Investing should be a part of everyday life, so it should also be enjoyable, right? We are enriching your investing experience using goals, rewards, leaderbords and dofferent chalanges that are not only fun ,but are making you a better investor! We are sure you are already eager to explore TatrInvest yourself so we will leave the rest of its features for you to explore!
 
 
 ## Contributors ✨
-
-Thanks go to these wonderful people
-<!--
-Here, you can show off all your cool teammates with whom you created this project.
-If you want to automate it, you can use a cool bot: https://allcontributors.org/
--->
+ - Robert Hudák
+ - Tomáš Hutňan
+ - Dávid Kepič
+ - Adrián Mikolaj
 
 ## License
 
@@ -60,5 +44,5 @@ If you want to automate it, you can use a cool bot: https://allcontributors.org/
 
 <!-- You can use this section to thank people who helped you create this awesome project outside of your team -->
 
-![image](.template_images/Bot.png)
+![image](.showcase_images/Bot.png)
 
