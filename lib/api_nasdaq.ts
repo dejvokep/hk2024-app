@@ -11,7 +11,6 @@ export async function getDailyStockData(symbol: string, fromdate: string, todate
     const date1 = new Date(fromdate);
     const date2 = new Date(todate);
     const dayDifference = Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24);
-    console.log(dayDifference);
 
     if (dayDifference <= 1){
         const price = await getCurrentStockPrice(symbol);
