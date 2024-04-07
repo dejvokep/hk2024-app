@@ -7,7 +7,7 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TB Investing",
+  title: "TatrInvest",
   description: "Tatra banka investing app for HK2024.",
 };
 
