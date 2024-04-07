@@ -17,7 +17,7 @@ export default function News({news}:{news: Array<{title: string, publishing_date
         })
     }, [api])
 
-    if (!news)
+    if (!news || news.length === 0)
         return null
 
     return <div>
