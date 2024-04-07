@@ -7,15 +7,10 @@ TatrInvest allows you to easily buy and sell stocks from all over the world with
 
 Investing should be a part of everyday life, so it should also be enjoyable, right? We are enriching your investing experience using goals, rewards, leaderbords and dofferent chalanges that are not only fun ,but are making you a better investor! We are sure you are already eager to explore TatrInvest yourself so we will leave the rest of its features for you to explore!
 
+![image](.showcase_images/Bot.png)
 
 ## Contributors ✨
  - Robert Hudák
  - Tomáš Hutňan
  - Dávid Kepič
  - Adrián Mikolaj
-
-## License
-
-
-![image](.showcase_images/Bot.png)
-
