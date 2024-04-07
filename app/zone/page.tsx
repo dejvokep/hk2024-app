@@ -6,15 +6,21 @@ import {getCurrentStockPrice, getDailyPortfolioValue} from "@/lib/api_nasdaq";
 import {getHistory, getPortfolio, getTransactions, getUserInfo} from "@/lib/db_mongo";
 import {redirect} from "next/navigation";
 import Goal from "@/components/zone/goal";
+import {getSession} from "@auth0/nextjs-auth0";
+import {NextResponse} from "next/server";
 
 export default async function Page() {
-    const info = await getUserInfo("66116391ee779e1b4fd68379")
+    const session = await getSession()
+    if (!session)
+        return new NextResponse(undefined, {status: 403})
+
+    const info = await getUserInfo(session.user.sub.substring(6))
 
     if (!info.questionnaire)
         return redirect("/onboarding")
 
-    const trans = await getTransactions("66116391ee779e1b4fd68379")
-    const portfolio = await getPortfolio("66116391ee779e1b4fd68379")
+    const trans = await getTransactions(session.user.sub.substring(6))
+    const portfolio = await getPortfolio(session.user.sub.substring(6))
 
     const prices: {[p: string]: number} = {}
     for (const code of Object.keys(portfolio)) {
@@ -24,7 +30,7 @@ export default async function Page() {
     for (const code of Object.keys(portfolio))
         sum += portfolio[code] * prices[code]
 
-    const history = await getHistory("66116391ee779e1b4fd68379")
+    const history = await getHistory(session.user.sub.substring(6))
 
     return <div>
         <div className="flex flex-col mx-auto w-full bg-black max-w-[480px] pb-[100px]">

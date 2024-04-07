@@ -4,6 +4,9 @@ import { MongoClient, ObjectId } from 'mongodb';
 const client = new MongoClient(process.env.MONGO_URI || "");
 
 export async function createUser(_id: string, email: string, name: string, surname: string, balance: number = 0, questionnaire: Map<string, any> = new Map, portfolio: Map<string, number> = new Map, transactions: [] = []): Promise<any> {
+    if (await getUserInfo(_id) !== undefined)
+        return 0
+
     await client.connect();
     const db = client.db("users");
 
