@@ -7,6 +7,9 @@ export default function News({news}:{news: Array<{title: string, publishing_date
     const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
 
+    if (!news)
+        return null
+
     useEffect(() => {
         if (!api)
             return
