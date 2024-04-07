@@ -60,9 +60,19 @@ export async function getDailyPortfolioValue(_id: string, days: number = 30): Pr
     
 
     let portfolioValue = 0;
-    for (const [symbol, quantity] of portfolio) {
+    //for (const [symbol, quantity] of portfolio) {
         //const stockData = await getDailyStockValue(_id, symbol, date, );
         //portfolioValue += stockData[symbol] * quantity;
+    //}
+    return portfolioValue;
+}
+
+export async function getCurrentPortfolioValue(_id: string): Promise<number> {
+    const portfolio = await getPortfolio(_id);
+    let portfolioValue = 0;
+    for (const symbol in portfolio) {
+        const stockPrice = await getCurrentStockPrice(symbol);
+        portfolioValue += stockPrice * portfolio[symbol];
     }
     return portfolioValue;
 }
