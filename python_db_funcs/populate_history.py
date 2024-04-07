@@ -6,7 +6,7 @@ import datetime
 def get_database():
  
    # Provide the mongodb atlas url to connect python to mongodb using pymongo
-   CONNECTION_STRING = ''
+   CONNECTION_STRING = 'mongodb+srv://admin:QSSCjjFGWvJSZdRq@userdata.ciyvzl2.mongodb.net/?retryWrites=true&w=majority&appName=userdata'
  
    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
    client = MongoClient(CONNECTION_STRING)
@@ -19,25 +19,8 @@ portfolios = db.get_collection('portfolios')
 objid = bson.ObjectId("66116391ee779e1b4fd68379")
 #portfolios.update_one({"_id": objid}, { "$push": { "history": {"date": "test", "value": 10} } })
 
-""" value = 341210.94
-date = datetime.datetime.now()
-history = []
-steps = 12
-for _ in range(365*steps):
-    value = value + (value * random.uniform(-0.001, 0.0008))
-    if random.randint(0, 1000) == 0:
-        value = value - value*0.3
-    elif value%(steps*10) == 0 and random.randint(0, 2) == 0:
-        value = value + random.choice([-0.07, 0.03]) * value
-    date = date - datetime.timedelta(hours=24//steps)
-    history.append({"date": date.strftime("%Y-%m-%dT%H:%M:%S"), "value": round(value, 2)})
-
-print(history[::-1], file=open("history.txt", "w")) """
-
-history = []
-with open("history.txt", "r") as f:
-    history = f.readline()
-    history = eval(history)
-
-portfolios.update_one({"_id": objid}, { "$set": { "history": history } })
+format = "%Y-%m-%dT%H:%M:%S"
+for i in range(1, 13):
+    date = datetime.datetime.strptime("2024-04-06T14:00:00", format) + datetime.timedelta(hours=i*2)
+    portfolios.update_one({"_id": objid}, { "$push": { "history": {"date": date.strftime(format), "value": 341210} } })
     #print({"date": date.strftime("%Y-%m-%dT%H:%M:%S"), "value": value})
