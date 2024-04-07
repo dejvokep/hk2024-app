@@ -5,15 +5,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import SymbolFetcher from "@/components/search/symbol-fetcher";
-
-// @ts-ignore
-export const SCHEMA = z.object({
-    text: z.string().min(2).max(8)
-})
+import {SEARCH_SCHEMA} from "@/lib/types";
 
 export default function Page() {
     const form = useForm({
-        resolver: zodResolver(SCHEMA),
+        resolver: zodResolver(SEARCH_SCHEMA),
         defaultValues: {
             text: ""
         }

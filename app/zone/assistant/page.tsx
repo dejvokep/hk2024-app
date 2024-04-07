@@ -9,15 +9,14 @@ import {Button} from "@/components/ui/button";
 import useFetch from "@/lib/hooks/useFetch";
 import {useState} from "react";
 import AssistantResponse from "@/components/zone/assistant-response";
+import {ASSISTANT_SCHEMA} from "@/lib/types";
 
 // @ts-ignore
-export const SCHEMA = z.object({
-    text: z.string().min(8).max(64)
-})
+
 
 export default function Page() {
     const form = useForm({
-        resolver: zodResolver(SCHEMA),
+        resolver: zodResolver(ASSISTANT_SCHEMA),
         defaultValues: {
             text: ""
         }
@@ -29,7 +28,7 @@ export default function Page() {
         status: -1
     })
 
-    function onSubmit(v: z.infer<typeof SCHEMA>) {
+    function onSubmit(v: z.infer<typeof ASSISTANT_SCHEMA>) {
         if (v.text.trim().length < 8)
             return
 

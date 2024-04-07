@@ -1,12 +1,12 @@
 import {UseFormReturn, useWatch} from "react-hook-form";
 import {z} from "zod";
-import {SCHEMA} from "@/app/zone/search/page";
 import {useEffect, useState} from "react";
 import ShareList from "@/components/search/share-list";
 import {AreaChart, Flame, LoaderCircle} from "lucide-react";
 import Recommendations from "@/components/zone/recommendations";
+import {SEARCH_SCHEMA} from "@/lib/types";
 
-export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SCHEMA>> }) {
+export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SEARCH_SCHEMA>> }) {
     const [data, setData] = useState<{
         status: number,
         list: Array<{code: string, name: string}>

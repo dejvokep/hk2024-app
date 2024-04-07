@@ -1,3 +1,5 @@
+import {z} from "zod";
+
 export const TIME_SPANS = {
     "1D": {
         last: 1,
@@ -53,3 +55,11 @@ export const IndustryMappers = {
 "UTILITIES": "Utilities",
 "TELECOMMUNICATIONS": "Telecommunications"
 }
+
+export const ASSISTANT_SCHEMA = z.object({
+    text: z.string().min(8).max(64)
+})
+
+export const SEARCH_SCHEMA = z.object({
+    text: z.string().min(2).max(8)
+})
