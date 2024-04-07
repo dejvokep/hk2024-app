@@ -22,11 +22,18 @@ export default function ShareItem({code, price}: {price: number, code: string}) 
     }
 
     if (f.loading) {
-        return <p>Loading...</p>
+        return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm" style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
+            <div className="font-bold my-auto">{code}</div>
+            <div className={"my-auto"}>€{price.toFixed(2)}</div>
+        </div>
     }
 
     if (f.error || !f.data) {
-        return <p>Error!</p>
+        return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm"
+                    style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
+            <div className="font-bold my-auto">{code}</div>
+            <div className={"my-auto"}>€{price.toFixed(2)}</div>
+        </div>
     }
 
     const value = price
@@ -38,7 +45,8 @@ export default function ShareItem({code, price}: {price: number, code: string}) 
     }
     const original = f.data[origDate]
 
-    return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm" style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
+    return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm"
+                style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
             <div className="font-bold my-auto">{code}</div>
             <div className={"my-auto"}>€{value.toFixed(2)}</div>
             <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>

@@ -2,6 +2,8 @@ import {UseFormReturn, useWatch} from "react-hook-form";
 import {z} from "zod";
 import {SCHEMA} from "@/app/zone/search/page";
 import {useEffect, useState} from "react";
+import ShareList from "@/components/search/share-list";
+import {LoaderCircle} from "lucide-react";
 
 export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SCHEMA>> }) {
     const [data, setData] = useState<{
@@ -15,7 +17,7 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            if (!values.text)
+            if (!values.text || values.text.length < 2)
                 return
 
             setData({
@@ -26,7 +28,7 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
             fetch("/api/search/", {
                 method: "POST",
                 body: JSON.stringify({
-                    text: values.text
+                    text: values.text.substring(0, Math.min(8, values.text.length))
                 })
             }).then(res => {
                 if (!res.ok) {
@@ -53,14 +55,14 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
     }, [values.text]);
 
     if (data.status === -1) {
-        return <div>
-            <p>Results will appear here.</p>
+        return <div className={"text-muted text-center mt-4"}>
+            <p>Results will appear here automatically.</p>
         </div>
     }
 
     if (data.status === 0) {
-        return <div>
-            <p>Loading...</p>
+        return <div className={"stroke-muted text-center mt-4 grid place-items-center"}>
+            <LoaderCircle className={"h-16 w-16 animate-spin"} />
         </div>
     }
 
@@ -71,7 +73,14 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
         </div>
     }
 
+    if (data.list.length === 0) {
+        return <div className={"text-muted text-center mt-4"}>
+            <p>Could not find any stocks.</p>
+        </div>
+    }
+
     return <div>
-        {data.list.map(e => <p key={e.code}>{e.code}</p>)}
+        <p className={"text-muted"}>Search results</p>
+        <ShareList prices={data.list}/>
     </div>
 }
