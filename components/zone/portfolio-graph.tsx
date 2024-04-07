@@ -36,7 +36,7 @@ export default function PortfolioGraph({portfolio, prices, sum, history}: {sum: 
                 <div className="self-stretch">{TIME_SPANS[span].label}</div>
             </div>
         </div>
-        <div className={"pl-10"}>
+        <div className={"grid place-items-center"}>
             <Graph v={data} className={cn("h-[300px] w-[300px]", sum >= init ? "stroke-secondary" : "stroke-destructive")} wi={"0.5px"}/>
         </div>
         <div className={"px-5"}>

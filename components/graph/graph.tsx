@@ -16,16 +16,16 @@ export default function Graph({v, className, wi = "1px"}: {v: {[key: string]: nu
 
     const w = 64, h = 32
 
-    return <div className={cn(className, "relative")}>
+    return <div className={cn(className, "relative overflow-hidden")}>
         <svg className={className} viewBox={`0 0 ${w} ${h}`}>
             {vals.map((p, i) => {
                 if (i+1 === vals.length)
                     return null
 
-                return <line key={i} x1={i * w / (vals.length-1)} y1={h-getY(p)} x2={(i+1) * w / (vals.length-1)} y2={h-getY(vals[i+1])} width={wi}/>
+                return <line key={i} x1={i * w / (vals.length-1)} y1={h-getY(p)} x2={(i+1) * w / (vals.length-1)} y2={h-getY(vals[i+1])} strokeWidth={"0.5"}/>
             })}
         </svg>
-        <div className={cn(className, "absolute top-0 left-0 bg-gradient-to-r from-[#000000FF] to-[#FFFFFF00]")}>
+        <div className={cn(className, "absolute top-0 left-0 bg-gradient-to-r from-[#000000FF] to-[#FFFFFF00] rotate-45")}>
         </div>
     </div>
 }

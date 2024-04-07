@@ -67,7 +67,7 @@ export default function StockGraph({sum,code}: {sum: number,code:string}) {
                 <div className="self-stretch">{TIME_SPANS[span].label}</div>
             </div>
         </div>
-        <div>
+        <div className={"grid place-items-center"}>
             <Graph v={f.data} className={cn("h-[300px] w-[300px]", sum >= init ? "stroke-secondary" : "stroke-destructive")} wi={"0.5px"}/>
         </div>
         <ExpandedSelect selected={span} setSelected={setSpan} selections={TIME_SPANS}/>
