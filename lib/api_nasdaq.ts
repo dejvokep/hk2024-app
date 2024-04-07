@@ -1,19 +1,23 @@
 import { getPortfolio, getTransactions } from "./db_mongo";
 
 export async function getCurrentStockPrice(symbol: string): Promise<number> {
-    const url = `https://api.nasdaq.com/api/quote/${symbol}/info?assetclass=stocks`;
+    const modifiedSymbol = symbol.replace(/-/g, '^');
+
+    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/info?assetclass=stocks`;
     const response = await fetch(url);
     const data = await response.json();
     return data.data.primaryData.lastSalePrice.substring(1);
 }
 
 export async function getDailyStockData(symbol: string, fromdate: string, todate: string): Promise<any> {
+    const modifiedSymbol = symbol.replace(/-/g, '^');
+
     const date1 = new Date(fromdate);
     const date2 = new Date(todate);
     const dayDifference = Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24);
 
     if (dayDifference <= 1){
-        const price = await getCurrentStockPrice(symbol);
+        const price = await getCurrentStockPrice(modifiedSymbol);
         let stockData: { [key: string]: number } = {}
         stockData[fromdate] = price;
         stockData[todate] = price;
@@ -21,7 +25,7 @@ export async function getDailyStockData(symbol: string, fromdate: string, todate
     }
 
     // date format: yyyy-mm-dd-dd
-    const url = `https://api.nasdaq.com/api/quote/${symbol}/historical?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
+    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/historical?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
 

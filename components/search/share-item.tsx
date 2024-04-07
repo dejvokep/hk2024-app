@@ -16,7 +16,7 @@ export default function ShareItem({code, name}: { code: string, name?: string })
         })
     })*/
 
-    return <Link href={"/zone/exchange/" + code}><div className="flex justify-between w-full tracking-normal bg-black rounded-xl shadow-sm">
+    return <Link href={"/zone/exchange/" + encodeURIComponent(code)}><div className="flex justify-between w-full tracking-normal bg-black rounded-xl shadow-sm">
         <div className={"max-w-[50vw]"}>
             {name && <p className={"text-white text-ellipsis"}>{name.substring(0, Math.min(40, name.length))}{name.length > 40 && "..."}</p>}
             <p className="text-sm text-muted">{code}</p>
