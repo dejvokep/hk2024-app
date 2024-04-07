@@ -3,9 +3,25 @@
 import {useState} from "react";
 import {TIME_SPANS} from "@/lib/types";
 import ExpandedSelect from "@/components/ui/expanded-select";
+import Graph from "@/components/graph/graph";
+import {cn} from "@/lib/utils";
 
-export default function PortfolioGraph({portfolio, prices,sum}: {sum: number, portfolio: {[k: string]: number}, prices: {[k: string]: number}}) {
+export default function PortfolioGraph({portfolio, prices, sum, history}: {sum: number, portfolio: {[k: string]: number}, prices: {[k: string]: number}, history: Array<{date: string, value: number}>}) {
     const [span, setSpan] = useState<keyof typeof TIME_SPANS>("1D")
+
+    const now = new Date();
+    TIME_SPANS[span].mod(now)
+    let iso = now.toISOString()
+    iso = iso.substring(0, iso.indexOf("T") || undefined)
+
+    let start: string = "9999-99-99"
+    const data = Object.fromEntries(history.filter(e => {
+        if (e.date < start && e.date >= iso)
+            start = e.date
+        return e.date >= iso
+    }).map(e => [e.date, e.value]))
+
+    const init = data[start]
 
     return <div>
         <div className="flex flex-col items-start pl-10 w-full">
@@ -13,21 +29,14 @@ export default function PortfolioGraph({portfolio, prices,sum}: {sum: number, po
                 {sum.toFixed(2)}€
             </div>
             <div className="flex gap-2.5 items-start pt-2.5 text-sm tracking-normal text-neutral-400">
-                <img
-                    loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/d5230564c823ede35a90419159011351c2e47a2efc89ce19260eb85401175125?"
-                    className="shrink-0 w-3 aspect-[1.2] fill-green-500 fill-opacity-40"
-                />
-                <div>3,35%</div>
-                <div>(432.94€)</div>
+                <div>{sum > init ? "+" : "-"}{(sum >= init ? (sum * 100 / init)-100 : 100-(sum * 100 / init)).toFixed(2)}%</div>
+                <div>({sum >= init ? "+" : "-"}{Math.abs(sum - init).toFixed(2)}€)</div>
                 <div className="self-stretch">{TIME_SPANS[span].label}</div>
             </div>
         </div>
-        <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/69c8087248ab7085021e3a562e5254fb14a974dd691b8a8c6e305b5fcc617d4b?"
-            className="self-start mt-1 w-full aspect-[1.23] stroke-[1.5px] stroke-white"
-        />
+        <div className={"pl-10"}>
+            <Graph v={data} className={cn("h-[300px] w-[300px]", sum >= init ? "stroke-secondary" : "stroke-destructive")}/>
+        </div>
         <ExpandedSelect selected={span} setSelected={setSpan} selections={TIME_SPANS}/>
     </div>
 }

@@ -62,6 +62,17 @@ export async function getPortfolio(_id: string): Promise<{[key: string]: number}
     return portfolio?.portfolio;
 }
 
+export async function getHistory(_id: string): Promise<Array<{date: string, value: number}>> {
+    await client.connect();
+    const db = client.db("users");
+
+    const portfolios_collection = db.collection("portfolios");
+    const portfolio = await portfolios_collection.findOne({ _id: new ObjectId(_id) });
+
+    await client.close();
+    return portfolio?.history;
+}
+
 export async function updateUserStock(_id: string, stock: string, quantity: number): Promise<any> {
     await client.connect();
     const db = client.db("users");
