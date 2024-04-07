@@ -25,7 +25,7 @@ export default function Page() {
                     <FormItem>
                         <FormControl>
                             <Input placeholder="Type at least 2 characters..." {...field}
-                                   className={"focus-visible:ring-transparent h-14 text-lg rounded-lg ring-muted"}/>
+                                   className={"ring-0 h-10 text-sm rounded-sm bg-card"}/>
                         </FormControl>
                     </FormItem>
                 )}/>

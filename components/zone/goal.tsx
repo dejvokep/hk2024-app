@@ -29,7 +29,7 @@ export default function Goal({info, sum}: { info: any, sum: number }) {
                      style={{width: `${Math.min(100, sum * 100 / goal.value)}%`}}></div>
             </div>
             <Button className={"w-full font-normal mt-7"} asChild>
-                <Link href={"/api/auth/login"}>Invest more</Link>
+                <Link href={"/zone/search"}>Invest more</Link>
             </Button>
         </div>
     </div>

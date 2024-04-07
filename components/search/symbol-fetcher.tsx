@@ -8,7 +8,7 @@ import {LoaderCircle} from "lucide-react";
 export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SCHEMA>> }) {
     const [data, setData] = useState<{
         status: number,
-        list: Array<{code: string, price: number}>
+        list: Array<{code: string, price: number, name: string}>
     }>({
         status: -1,
         list: []
@@ -80,7 +80,7 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
     }
 
     return <div>
-        <p className={"text-muted"}>Search results</p>
+        <p className={"text-white text-sm font-bold"}>Stocks & ETFs</p>
         <ShareList prices={data.list}/>
     </div>
 }
