@@ -37,7 +37,7 @@ export default function PortfolioGraph({portfolio, prices, sum, history}: {sum: 
             </div>
         </div>
         <div className={"pl-10"}>
-            <Graph v={data} className={cn("h-[300px] w-[300px]", sum >= init ? "stroke-secondary" : "stroke-destructive")}/>
+            <Graph v={data} className={cn("h-[300px] w-[300px]", sum >= init ? "stroke-secondary" : "stroke-destructive")} wi={"0.5px"}/>
         </div>
         <ExpandedSelect selected={span} setSelected={setSpan} selections={TIME_SPANS}/>
     </div>

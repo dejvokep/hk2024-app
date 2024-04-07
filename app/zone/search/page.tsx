@@ -18,14 +18,14 @@ export default function Page() {
         }
     })
 
-    return <div>
+    return <div className={"px-5 pb-[20px]"}>
         <Form {...form}>
-            <form className="w-full">
+            <form className="w-full mb-4">
                 <FormField control={form.control} name="text" render={({field}) => (
                     <FormItem>
                         <FormControl>
-                            <Input placeholder="Search..." {...field}
-                                   className={"focus-visible:ring-transparent"}/>
+                            <Input placeholder="Type at least 2 characters..." {...field}
+                                   className={"ring-0 h-10 text-sm rounded-sm bg-card"}/>
                         </FormControl>
                     </FormItem>
                 )}/>

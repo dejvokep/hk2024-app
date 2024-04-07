@@ -20,7 +20,7 @@ export const TIME_SPANS = {
         mod: (d: Date) => d.setFullYear(d.getFullYear() - 1)
     },
     "All": {
-        last: 0,
+        last: 365,
         label: "All time",
         mod: (d: Date) => d.setFullYear(d.getFullYear() - 1)
     },

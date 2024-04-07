@@ -3,50 +3,26 @@
 import Graph from "@/components/graph/graph";
 import {cn} from "@/lib/utils";
 import useFetch from "@/lib/hooks/useFetch";
+import {PlusCircle} from "lucide-react";
+import Link from "next/link";
 
-export default function ShareItem({code, price}: {price: number, code: string}) {
-    const f = useFetch<{[key: string]: number}>("/api/stock/daily", {
+export default function ShareItem({code, price, name}: { price: number, code: string, name: string }) {
+    /*const f = useFetch<{[key: string]: number}>("/api/stock/daily", {
         method: "POST",
         body: JSON.stringify({
             code,
             from: getDate(7),
             to: getDate(0)
         })
-    })
+    })*/
 
-    function getDate(sub: number) {
-        const d = new Date()
-        d.setDate(d.getDate() - sub)
-        const s = d.toISOString()
-        return s.substring(0, s.indexOf("T"))
-    }
-
-    if (f.loading) {
-        return <p>Loading...</p>
-    }
-
-    if (f.error || !f.data) {
-        return <p>Error!</p>
-    }
-
-    const value = price
-    let origDate = "9999-99-99"
-
-    for (const k of Object.keys(f.data)) {
-        if (k < origDate)
-            origDate = k
-    }
-    const original = f.data[origDate]
-
-    return <div className="flex justify-between p-5 w-full tracking-normal text-white bg-black rounded-xl shadow-sm" style={{boxShadow: "inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), 0 -2px 10px 0 rgba(255, 255, 255, 0.1)"}}>
-            <div className="font-bold my-auto">{code}</div>
-            <div className={"my-auto"}>€{value.toFixed(2)}</div>
-            <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>
-                {value >= original ? "+" : "-"}{Math.abs(value - original).toFixed(2)}
-            </div>
-            <div className={cn("my-auto text-xs tracking-normal text-opacity-40", value >= original ? "text-secondary" : "stroke-destructive")}>
-                ({value >= original ? "+" : "-"}{(value >= original ? (value * 100 / original)-100 : 100-(value * 100 / original)).toFixed(2)}%)
-            </div>
-        <Graph v={f.data} className={cn("h-8 w-16", value >= original ? "stroke-secondary" : "stroke-destructive")}/>
-    </div>
+    return <Link href={"/zone/exchange/" + code}><div className="flex justify-between w-full tracking-normal bg-black rounded-xl shadow-sm">
+        <div className={"max-w-[50vw]"}>
+            <p className={"text-white text-ellipsis"}>{name.substring(0, Math.min(40, name.length))}{name.length > 40 && "..."}</p>
+            <p className="text-sm text-muted">{code}</p>
+        </div>
+        <div className={"grid place-items-center"}>
+            <PlusCircle className={"stroke-secondary"} />
+        </div>
+    </div></Link>
 }
