@@ -4,11 +4,12 @@ import {SCHEMA} from "@/app/zone/search/page";
 import {useEffect, useState} from "react";
 import ShareList from "@/components/search/share-list";
 import {LoaderCircle} from "lucide-react";
+import Recommendations from "@/components/zone/recommendations";
 
 export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<typeof SCHEMA>> }) {
     const [data, setData] = useState<{
         status: number,
-        list: Array<{code: string, price: number, name: string}>
+        list: Array<{code: string, name: string}>
     }>({
         status: -1,
         list: []
@@ -55,14 +56,12 @@ export default function SymbolFetcher({form}: { form: UseFormReturn<z.infer<type
     }, [values.text]);
 
     if (data.status === -1) {
-        return <div className={"text-muted text-center mt-4"}>
-            <p>Results will appear here automatically.</p>
-        </div>
+        return <Recommendations />
     }
 
     if (data.status === 0) {
         return <div className={"stroke-muted text-center mt-4 grid place-items-center"}>
-            <LoaderCircle className={"h-16 w-16 animate-spin"} />
+            <LoaderCircle className={"h-12 w-12 animate-spin"} />
         </div>
     }
 
