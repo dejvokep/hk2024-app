@@ -25,11 +25,11 @@ export async function getDailyStockData(symbol: string, fromdate: string, todate
     }
 
     // date format: yyyy-mm-dd-dd
-    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/historical?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
+    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/chart?assetclass=stocks&fromdate=${fromdate}&todate=${todate}&api_key=${process.env.NASDAQ_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
 
-    const chart = data.data.tradesTable.rows;
+    const chart = data.data.chart;
 
     if (!chart)
         return []
@@ -37,7 +37,7 @@ export async function getDailyStockData(symbol: string, fromdate: string, todate
     let stockData: { [key: string]: number } = {}; // Explicitly define the type of stockData
 
     for (let i = 0; i < chart.length; i++) {
-        stockData[convertDateFormat(chart[i].date)] = chart[i].close.substring(1);
+        stockData[convertDateFormat(chart[i].z.dateTime)] = chart[i].y;
     }
     return stockData;
 }
