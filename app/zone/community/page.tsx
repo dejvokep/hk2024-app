@@ -7,7 +7,7 @@ export default async function Page() {
     const user = await getSession()
 
     return <div
-        className="bg-[#000000] flex flex-col gap-0 items-start justify-start relative overflow-hidden"
+        className="bg-[#000000] -mt-16 flex flex-col gap-0 items-start justify-start relative overflow-hidden"
     >
         <div
             className="flex flex-col gap-0 items-center justify-start self-stretch shrink-0 relative overflow-hidden"

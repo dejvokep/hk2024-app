@@ -17,7 +17,7 @@ export default async function Page() {
     const info = await getUserInfo(session.user.sub.substring(6))
 
     if (!info.questionnaire)
-        return redirect("/onboarding")
+        return redirect("/onboarding/tutorial/0")
 
     const trans = await getTransactions(session.user.sub.substring(6))
     const portfolio = await getPortfolio(session.user.sub.substring(6))

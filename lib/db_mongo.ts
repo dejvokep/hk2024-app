@@ -3,15 +3,15 @@ import { MongoClient, ObjectId } from 'mongodb';
 // Replace with your connection string and database name
 const client = new MongoClient(process.env.MONGO_URI || "");
 
-export async function createUser(_id: string, email: string, name: string, surname: string, balance: number = 0, questionnaire: Map<string, any> = new Map, portfolio: Map<string, number> = new Map, transactions: [] = []): Promise<any> {
-    if (await getUserInfo(_id) !== undefined)
+export async function createUser(_id: string, email: string, name: string, surname: string, balance: number = 0, portfolio: Map<string, number> = new Map, transactions: [] = []): Promise<any> {
+    if (await exists(_id))
         return 0
 
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
-    await info_collection.insertOne({ _id: new ObjectId(_id), email, name, surname, balance, questionnaire});
+    const info_collection = db.collection("info");
+    await info_collection.insertOne({ _id: new ObjectId(_id), email, name, surname, balance});
 
     const portfolios_collection = db.collection("portfolios");
     await portfolios_collection.insertOne({ _id: new ObjectId(_id), portfolio});
@@ -26,7 +26,7 @@ export async function updateUserQuestionnaire(_id: string, questionnaire: Map<st
     await client.connect();
     const db = client.db("users");
 
-    const info_collection = db.collection("userdata");
+    const info_collection = db.collection("info");
     await info_collection.updateOne({ _id: new ObjectId(_id) }, { $set: { questionnaire } });
 
     await client.close();
@@ -52,6 +52,17 @@ export async function getUserInfo(_id: string): Promise<any> {
 
     await client.close();
     return info;
+}
+
+export async function exists(_id: string): Promise<boolean> {
+    await client.connect();
+    const db = client.db("users");
+
+    const info_collection = db.collection("info");
+    const info = await info_collection.findOne({ _id: new ObjectId(_id) });
+
+    await client.close();
+    return info !== null;
 }
 
 export async function getPortfolio(_id: string): Promise<{[key: string]: number}> {

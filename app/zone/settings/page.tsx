@@ -1,9 +1,10 @@
 import {getSession} from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 export default async function Page() {
     const user = await getSession()
     return <div
-        className="bg-[#000000] flex flex-col gap-0 items-start justify-start h-[844px] relative overflow-hidden"
+        className="bg-[#000000] -mt-16 flex flex-col gap-0 items-start justify-start h-[844px] relative overflow-hidden"
     >
         <div
             className="flex flex-col gap-0 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
@@ -102,11 +103,13 @@ export default async function Page() {
                         <div
                             className="border-solid border-[#2d2d2d] border p-5 flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
                         >
-                            <div
-                                className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
-                            >
-                                Notifications
-                            </div>
+                            <Link href={"/onboarding"}>
+                                <div
+                                    className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
+                                >
+                                    Settings
+                                </div>
+                            </Link>
                         </div>
                         <div
                             className="border-solid border-[#2d2d2d] border p-5 flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative overflow-hidden"
@@ -114,7 +117,7 @@ export default async function Page() {
                             <div
                                 className="text-[#ffffff] text-left font-['Arial-Regular',_sans-serif] text-base font-normal relative"
                             >
-                                Language
+                                Notifications
                             </div>
                         </div>
                         <div

@@ -10,11 +10,12 @@ export default function ProfileMenu() {
     const session = useUser()
     const pathname = usePathname()
 
-    if (pathname === "/zone/settings")
+    if (pathname === "/zone/settings" || pathname === "/zone/community")
         return null
 
     return <header className={"fixed left-0 top-0 p-5 flex w-full flex-row justify-between bg-black z-50"}>
         <MenuItem link={"/zone/settings"} icon={c => <img alt={"profile"} src={session?.user?.picture || ""} className={cn(c, "rounded")}/>}/>
+        <div><p>{session.user?.nickname}</p></div>
         <MenuItem link={"/zone/assistant"} icon={c => <Bot className={c}/>}/>
     </header>
 }

@@ -3,12 +3,15 @@ import Logo from "@/components/Logo";
 import Link from "next/link";
 import {getSession} from "@auth0/nextjs-auth0";
 import {redirect} from "next/navigation";
+import {createUser} from "@/lib/db_mongo";
 
 export default async function Home() {
     const session = await getSession();
 
-    if (session)
+    if (session) {
+        await createUser(session.user.sub.substring(6), "", "", "")
         return redirect("/zone")
+    }
 
     return (
         <main className={"flex justify-center w-full min-h-screen py-[100px]"}>
