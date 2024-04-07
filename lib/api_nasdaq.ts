@@ -3,7 +3,7 @@ import { getPortfolio, getTransactions } from "./db_mongo";
 export async function getCurrentStockPrice(symbol: string): Promise<number> {
     const modifiedSymbol = symbol.replace(/-/g, '^');
 
-    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/info?assetclass=stocks`;
+    const url = `https://api.nasdaq.com/api/quote/${modifiedSymbol}/info?assetclass=stocks%api_key=${process.env.NASDAQ_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     return data.data.primaryData.lastSalePrice.substring(1);
