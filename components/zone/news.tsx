@@ -7,9 +7,6 @@ export default function News({news}:{news: Array<{title: string, publishing_date
     const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
 
-    if (!news)
-        return null
-
     useEffect(() => {
         if (!api)
             return
@@ -20,9 +17,12 @@ export default function News({news}:{news: Array<{title: string, publishing_date
         })
     }, [api])
 
+    if (!news)
+        return null
+
     return <div><Carousel setApi={setApi}>
         <CarouselContent>
-            {news.map(n => <CarouselItem>
+            {news.map(n => <CarouselItem key={n.publishing_date}>
                 <p className={"text-justify"}>{n.title}</p>
                 <p className={"text-muted text-right"}> {new Date(n.publishing_date).toDateString()}</p>
             </CarouselItem>)}
