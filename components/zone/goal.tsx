@@ -1,8 +1,6 @@
-import {Progress} from "@/components/ui/progress";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
-import {ArrowRight} from "lucide-react";
 
 export default function Goal({info, sum}: { info: any, sum: number }) {
     if (!info.questionnaire || !info.questionnaire.goal)

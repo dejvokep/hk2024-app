@@ -1,8 +1,7 @@
 import PortfolioGraph from "@/components/zone/portfolio-graph";
 import Controls from "@/components/zone/controls";
-import ShareItem from "@/components/zone/share-item";
 import ShareList from "@/components/zone/share-list";
-import {getCurrentStockPrice, getDailyPortfolioValue} from "@/lib/api_nasdaq";
+import {getCurrentStockPrice} from "@/lib/api_nasdaq";
 import {getHistory, getPortfolio, getTransactions, getUserInfo} from "@/lib/db_mongo";
 import {redirect} from "next/navigation";
 import Goal from "@/components/zone/goal";
