@@ -5,6 +5,7 @@ import {TIME_SPANS} from "@/lib/types";
 import ExpandedSelect from "@/components/ui/expanded-select";
 import Graph from "@/components/graph/graph";
 import {cn} from "@/lib/utils";
+import {ArrowDown, ArrowUp} from "lucide-react";
 
 export default function PortfolioGraph({portfolio, prices, sum, history}: {sum: number, portfolio: {[k: string]: number}, prices: {[k: string]: number}, history: Array<{date: string, value: number}>}) {
     const [span, setSpan] = useState<keyof typeof TIME_SPANS>("1D")
@@ -29,6 +30,7 @@ export default function PortfolioGraph({portfolio, prices, sum, history}: {sum: 
                 {sum.toFixed(2)}€
             </div>
             <div className="flex gap-2.5 items-start pt-2.5 text-sm tracking-normal text-neutral-400">
+                <div className={"grid place-items-center"}>{sum >= init ? <ArrowUp className={"h-4 stroke-secondary"} /> : <ArrowDown className={"h-4 stroke-destructive"} />}</div>
                 <div>{sum > init ? "+" : "-"}{(sum >= init ? (sum * 100 / init)-100 : 100-(sum * 100 / init)).toFixed(2)}%</div>
                 <div>({sum >= init ? "+" : "-"}{Math.abs(sum - init).toFixed(2)}€)</div>
                 <div className="self-stretch">{TIME_SPANS[span].label}</div>
