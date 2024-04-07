@@ -2,10 +2,11 @@ import {Progress} from "@/components/ui/progress";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
+import {ArrowRight} from "lucide-react";
 
 export default function Goal({info, sum}: { info: any, sum: number }) {
     if (!info.questionnaire || !info.questionnaire.goal)
-        return <p>No goal.</p>
+        return <p className={"text-center text-muted py-4"}>No investment goal. <Link href={"/onboarding"}><span className={"text-secondary inline-flex flex-row"}>Set a goal...</span></Link></p>
 
     const goal = info.questionnaire.goal
 
