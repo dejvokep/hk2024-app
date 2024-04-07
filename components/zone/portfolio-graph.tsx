@@ -4,11 +4,8 @@ import {useState} from "react";
 import {TIME_SPANS} from "@/lib/types";
 import ExpandedSelect from "@/components/ui/expanded-select";
 
-export default function PortfolioGraph({portfolio, prices}: {portfolio: {[k: string]: number}, prices: {[k: string]: number}}) {
+export default function PortfolioGraph({portfolio, prices,sum}: {sum: number, portfolio: {[k: string]: number}, prices: {[k: string]: number}}) {
     const [span, setSpan] = useState<keyof typeof TIME_SPANS>("1D")
-    let sum = 0;
-    for (const code of Object.keys(portfolio))
-        sum += portfolio[code] * prices[code]
 
     return <div>
         <div className="flex flex-col items-start pl-10 w-full">
