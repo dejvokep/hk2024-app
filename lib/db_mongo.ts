@@ -29,7 +29,7 @@ export async function updateUserQuestionnaire(_id: string, questionnaire: Map<st
     await client.close();
 }
 
-export async function getUserQuestionnaire(_id: string): Promise<any> {
+export async function getUserQuestionnaire(_id: string): Promise<Map<string,any>> {
     await client.connect();
     const db = client.db("users");
 
